@@ -9,7 +9,10 @@ const AV = Autodesk.Viewing;
 const div = document.getElementById("viewer");
 
 async function startViewer(urn) {
-    const token = "2342345";// await (await fetch('https://oorhjg6vpaolxsjfgjdayhu2we0fmddh.lambda-url.us-west-2.on.aws/')).json();
+	const token = navigator.onLine ? 
+		await (await fetch('https://oorhjg6vpaolxsjfgjdayhu2we0fmddh.lambda-url.us-west-2.on.aws/')).json() : 
+		{ access_token: '1234' };
+
 	try {
 		// Always try to initialize viewer, regardless of token status
 		await new Promise((resolve) => {
