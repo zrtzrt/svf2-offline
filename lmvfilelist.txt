@@ -1,6 +1,7 @@
 https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.min.js
 https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.min.css
 https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/res/locales/en/allstrings.json
+https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/res/locales/zh-Hans/allstrings.json
 https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/lmvworker.min.js
 https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/extensions/MixpanelProvider/MixpanelProvider.min.js
 https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/extensions/ViewCubeUi/ViewCubeUi.min.js
@@ -15,7 +16,7 @@ https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/extensions/Com
 https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/extensions/DocumentBrowser/DocumentBrowser.min.js
 https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/res/environments/boardwalk_irr.logluv.dds
 https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/res/environments/boardwalk_mipdrop.logluv.dds
-https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/res/locales/en/VCcrossRGBA8small.dds
+https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/res/ui/powered-by-autodesk-blk-rgb.png
 https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/res/textures/VCedge1.png
 https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/res/textures/VChome.png
 https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/res/textures/VCarrows.png

@@ -70,13 +70,15 @@ self.addEventListener('activate', event => {
 
 // Fetch: serve from cache or network
 self.addEventListener('fetch', event => {
-  // Skip Autodesk API calls
-  if (event.request.url.includes('developer.api.autodesk.com')) {
-    return;
-  }
-
+  // Note: no early return for developer.api.autodesk.com here. ASSETS_TO_CACHE
+  // deliberately contains Viewer runtime files from that host, so those requests
+  // must be able to hit the cache -- skipping them unconditionally made the
+  // install-time cache unreachable and broke offline use. Requests that are not
+  // in the cache (e.g. derivative/model data) simply fall through to the network
+  // below, which keeps the previous behaviour for everything else.
   event.respondWith(
     caches.match(event.request)
       .then(response => response || fetch(event.request))
+      .catch(() => Response.error())
   );
 });
