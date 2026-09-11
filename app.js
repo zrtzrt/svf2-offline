@@ -1,16 +1,25 @@
+// The model URN and the token endpoint live in config.json, so pointing the demo
+// at your own model doesn't require touching this file.
+const CONFIG_URL = 'config.json';
+
 // Initialize your Autodesk Viewer here
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
 	console.log('App initialized, waiting for Autodesk Viewer to load...');
-	
-	startViewer("dXJuOmFkc2sud2lwcHJvZDpmcy5maWxlOnZmLm1IcnhtVkVsU3NpVVdQcWRmSUVXRXc_dmVyc2lvbj0x");
-}); 
+
+	try {
+		const config = await (await fetch(CONFIG_URL)).json();
+		startViewer(config.urn, config.tokenUrl);
+	} catch (err) {
+		console.error(`Could not load ${CONFIG_URL} -- fill in your own URN and token endpoint there.`, err);
+	}
+});
 
 const AV = Autodesk.Viewing;
 const div = document.getElementById("viewer");
 
-async function startViewer(urn) {
-	const token = navigator.onLine ? 
-		await (await fetch('https://oorhjg6vpaolxsjfgjdayhu2we0fmddh.lambda-url.us-west-2.on.aws/')).json() : 
+async function startViewer(urn, tokenUrl) {
+	const token = navigator.onLine ?
+		await (await fetch(tokenUrl)).json() :
 		{ access_token: '1234' };
 
 	try {

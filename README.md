@@ -19,6 +19,7 @@ the toolbar, ViewCube, navigation and extensions no longer depend on the CDN.
 |---|---|
 | `index.html` | Page shell. Loads the Viewer from the APS CDN and registers the service worker. |
 | `app.js` | Boots the Viewer (`env: AutodeskProduction2`, `api: streamingV2`), picks a token — online: fetches it from a token endpoint, offline: falls back to a dummy token — and loads the model URN. |
+| `config.json` | The model URN and the token endpoint. The only file you edit to point the demo at your own model. |
 | `service-worker.js` | Pre-caches the runtime asset list on install, then answers matching requests cache-first. |
 | `lmvfilelist.txt` | The list of Viewer runtime URLs to mirror (28 entries). |
 | `setup/download-svf-offline.sh` | Mirrors the runtime with `wget -r -i lmvfilelist.txt`, then optionally swaps the Forge logo for an ACME logo. |
@@ -153,15 +154,19 @@ APS_CLIENT_ID=your-client-id APS_CLIENT_SECRET=your-client-secret node token-ser
 # → http://localhost:3000/
 ```
 
-### 6. Point `app.js` at your model and token server
+### 6. Point the demo at your model and token server
 
-Two edits in `app.js`:
+`config.json` is the only file you edit:
 
-```js
-startViewer('<YOUR_BASE64URL_URN>');                       // the URN from step 4
-// …
-await (await fetch('http://localhost:3000/')).json();      // the endpoint from step 5
+```json
+{
+	"urn": "<YOUR_BASE64URL_URN>",         // the URN from step 4
+	"tokenUrl": "http://localhost:3000/"   // the endpoint from step 5
+}
 ```
+
+`app.js` reads it on page load, so the file that ships with the repo (the original demo URN and
+token endpoint) and your own model use the exact same code path.
 
 The offline branch sends `{ access_token: '1234' }`, which is enough for the page shell because the
 cached runtime is same-origin and never validates the token. For a real app, pass a
